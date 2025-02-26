@@ -1,9 +1,13 @@
 {% extends "base.html" %}
+{% load markdown_extras %}
 
 {% block content %}
 <div class="container">
     <div class="quiz-card">
-        <h1>{{ question.text }}</h1>
+        <!-- Display the title as a heading -->
+        <h1>{{ question.title }}</h1>
+        <!-- Display the text as Markdown -->
+        <div>{{ question.text|markdownify|safe }}</div>
 
         <!-- Display answers -->
         <form method="post">
@@ -17,7 +21,7 @@
                     {% else %}
                         <!-- Hide checkboxes and highlight answers after submission -->
                         <div class="form-check-label {% if answer.is_correct %}text-success{% elif answer.id in selected_answers %}text-danger{% endif %}">
-                            {{ answer.text }}
+                            <strong>{{ answer.text }}</strong> <!-- Make the text bold -->
                             {% if answer.is_correct %}<span class="badge bg-success">Correct</span>{% endif %}
                             {% if answer.id in selected_answers and not answer.is_correct %}<span class="badge bg-danger">Incorrect</span>{% endif %}
                         </div>
@@ -46,7 +50,7 @@
         {% if messages %}
             <div class="mt-4">
                 <h2>Explanation</h2>
-                <p>{{ question.explanation }}</p>
+                <div>{{ question.explanation|markdownify|safe }}</div>
                 <h2>Resources</h2>
                 <ul>
                     {% for resource in question.resource_set.all %}

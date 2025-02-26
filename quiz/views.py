@@ -24,7 +24,7 @@ def question_detail(request, question_id):
             user_is_correct = True
             messages.success(request, "Congratulations! You got it right! 🎉")
         else:
-            messages.warning(request, "Oops! That's not quite right. Please review the resources below to improve your understanding.")
+            messages.warning(request, "That's not quite right. Please review the resources below to improve your understanding.")
         
     return render(request, 'quiz/detail.html', {
         'question': question,
