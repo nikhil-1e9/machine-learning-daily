@@ -19,8 +19,8 @@ from django.urls import path, include
 from quiz import views  # Import the views from quiz app
 
 urlpatterns = [
+    path('', views.quiz_home, name='home'),  # Home page
     path("admin/", admin.site.urls),  # Admin panel
     path("quiz/", include('quiz.urls')),  # Quiz app URLs
     path('accounts/', include('django.contrib.auth.urls')),  # Authentication URLs
-    path('', views.quiz_home, name='home'),
 ]

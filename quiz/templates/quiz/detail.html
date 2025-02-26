@@ -1,16 +1,67 @@
-<h1>{{ question.text }}</h1>
-<form method="post">
-    {% csrf_token %}
-    {% for answer in question.answer_set.all %}
-        <input type="checkbox" name="answer" value="{{ answer.id }}"> {{ answer.text }}<br>
-    {% endfor %}
-    <button type="submit">Submit</button>
-</form>
-<h2>Explanation</h2>
-<p>{{ question.explanation }}</p>
-<h2>Resources</h2>
-<ul>
-    {% for resource in question.resource_set.all %}
-        <li><a href="{{ resource.url }}">{{ resource.title }}</a></li>
-    {% endfor %}
-</ul>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="quiz-card">
+        <h1>{{ question.text }}</h1>
+
+        <!-- Display answers -->
+        <form method="post">
+            {% csrf_token %}
+            {% for answer in question.answer_set.all %}
+                <div class="form-check">
+                    {% if not messages %}
+                        <!-- Show checkboxes before submission -->
+                        <input class="form-check-input" type="checkbox" name="answer" value="{{ answer.id }}">
+                        <label class="form-check-label">{{ answer.text }}</label>
+                    {% else %}
+                        <!-- Hide checkboxes and highlight answers after submission -->
+                        <div class="form-check-label {% if answer.is_correct %}text-success{% elif answer.id in selected_answers %}text-danger{% endif %}">
+                            {{ answer.text }}
+                            {% if answer.is_correct %}<span class="badge bg-success">Correct</span>{% endif %}
+                            {% if answer.id in selected_answers and not answer.is_correct %}<span class="badge bg-danger">Incorrect</span>{% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <!-- Show submit button only before submission -->
+            {% if not messages %}
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            {% endif %}
+        </form>
+
+        <!-- Display messages (correct/wrong feedback) -->
+        {% if messages %}
+            <div class="mt-4">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-warning{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Show explanation and resources only after submission -->
+        {% if messages %}
+            <div class="mt-4">
+                <h2>Explanation</h2>
+                <p>{{ question.explanation }}</p>
+                <h2>Resources</h2>
+                <ul>
+                    {% for resource in question.resource_set.all %}
+                        <li><a href="{{ resource.url }}" target="_blank">{{ resource.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Show "Try Again" button if the user didn't select all correct answers -->
+        {% if messages and not user_is_correct %}
+            <div class="mt-4">
+                <a href="{% url 'question_detail' question.id %}" class="btn btn-secondary">Try Again</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
