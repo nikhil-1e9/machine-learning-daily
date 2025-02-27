@@ -31,7 +31,7 @@ DEBUG = False  # turned off for production
 
 # ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ['ml-daily.onrender.com', 'localhost', '127.0.0.1']  # When debug=False then only populate this otherwise empty
-ALLOWED_HOSTS = ['your-app-name.up.railway.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['machine-learning-daily-production.up.railway.app', 'localhost', '127.0.0.1']
 
 # Application definition
 
