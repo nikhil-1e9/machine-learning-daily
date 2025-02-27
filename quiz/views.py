@@ -4,9 +4,12 @@ from django.contrib.auth import login
 from django.contrib import messages
 from .models import Question, Answer, Resource
 
-def quiz_home(request):
+def home(request):
+    return render(request, 'quiz/home.html')
+
+def quiz_page(request):
     questions = Question.objects.all()
-    return render(request, 'quiz/home.html', {'questions': questions})
+    return render(request, 'quiz/quiz_page.html', {'questions': questions})
 
 def question_detail(request, question_id):
     question = get_object_or_404(Question, id=question_id)
@@ -32,6 +35,8 @@ def question_detail(request, question_id):
         'selected_answers': selected_answers,
     })
         
+def contact(request):
+    return render(request, 'quiz/contact.html')
 
 def signup(request):
     if request.method == 'POST':

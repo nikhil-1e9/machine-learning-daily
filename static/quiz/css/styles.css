@@ -74,3 +74,22 @@ body {
 .bg-danger {
     background-color: #dc3545; /* Red background for incorrect badge */
 }
+
+/* Custom styles for contact icons */
+.contact-icons a {
+    color: #333; /* Default icon color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease; /* Smooth color transition */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align icon and text */
+    margin: 0 15px; /* Space between icons */
+}
+
+.contact-icons a:hover {
+    color: #007bff; /* Icon color on hover */
+}
+
+.contact-icons a div {
+    margin-top: 5px; /* Space between icon and text */
+}

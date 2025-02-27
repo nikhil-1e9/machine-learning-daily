@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Questions</h1>
+    <p class="lead">
+        Test your machine learning knowledge with these short and interactive quizzes
+    </p>
+    <div class="row">
+        {% for question in questions %}
+            <div class="col-md-6">
+                <div class="quiz-card">
+                    <h2>{{ question.title }}</h2>
+                    <a href="{% url 'question_detail' question.id %}" class="btn btn-primary">Take Quiz</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
