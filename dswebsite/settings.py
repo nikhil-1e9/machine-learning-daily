@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # collect static files in production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # collect static files in production
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -27,11 +27,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 SECRET_KEY = "django-insecure-z=r&&k(f^h%jc1w=7$y=j9b6#4$0u7+ci=nagpllh1gg5iw0an"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # turned off for production
+DEBUG = False  # turned off for production
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ['ml-daily.onrender.com', 'localhost', '127.0.0.1']  # When debug=False then only populate this otherwise empty
-
+ALLOWED_HOSTS = ['your-app-name.up.railway.app', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -53,7 +53,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = "dswebsite.urls"
 

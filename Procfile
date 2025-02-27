@@ -1,0 +1,1 @@
+web: gunicorn mydswebsite.wsgi:application --log-file -
