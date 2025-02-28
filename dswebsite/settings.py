@@ -33,6 +33,10 @@ DEBUG = False  # turned off for production
 # ALLOWED_HOSTS = ['ml-daily.onrender.com', 'localhost', '127.0.0.1']  # When debug=False then only populate this otherwise empty
 ALLOWED_HOSTS = ['machine-learning-daily-production.up.railway.app', 'localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = ['https://machine-learning-daily-production.up.railway.app']
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
 # Application definition
 
 INSTALLED_APPS = [
