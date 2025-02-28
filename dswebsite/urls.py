@@ -23,5 +23,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),  # Admin panel
     path("quiz/", include('quiz.urls')),  # Quiz app URLs
     path('contact/', views.contact, name='contact'),  # Contact page
-    path('accounts/', include('django.contrib.auth.urls')),  # Authentication URLs
+    # path('accounts/', include('django.contrib.auth.urls')),  # Authentication URLs
 ]

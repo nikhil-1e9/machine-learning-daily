@@ -38,13 +38,13 @@ def question_detail(request, question_id):
 def contact(request):
     return render(request, 'quiz/contact.html')
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)  # Log the user in after signing up
-            return redirect('quiz_home')  # Redirect to the home page
-    else:
-        form = UserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form})
+# def signup(request):
+#     if request.method == 'POST':
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             login(request, user)  # Log the user in after signing up
+#             return redirect('quiz_home')  # Redirect to the home page
+#     else:
+#         form = UserCreationForm()
+#     return render(request, 'registration/signup.html', {'form': form})
